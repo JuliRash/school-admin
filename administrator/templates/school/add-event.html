@@ -1,0 +1,80 @@
+{% extends 'school/form-base.html' %}
+{% load staticfiles %}
+{% load i18n widget_tweaks %}
+{% block title %}Add-Event {% endblock %}
+{% block heading %} Add Event {% endblock %}
+{% block content %}
+<div class="main-content container-fluid">
+  <div class="row">
+    <div class="col-md-12">
+      <div class="panel panel-default panel-border-color panel-border-color-primary">
+        <div class="panel-heading panel-heading-divider">Event<span class="panel-subtitle">Add or Edit  Event.</span></div>
+        <div class="panel-body">
+            {# error logic #}
+            {% for field, errors in form.errors.items %}
+            <div class="alert alert-danger alert-dismissible">
+            {% for error in errors %}
+            <center> <strong>{{ error|escape }}</strong></center>
+            {% endfor %}
+            </div>
+            {% endfor %}
+          <form action="#" style="border-radius: 0px;" class="form-horizontal group-border-dashed" method="post" enctype="multipart/form-data">
+            {% csrf_token %}
+            <div class="form-group">
+              <label class="col-sm-2 control-label">Event Name</label>
+              <div class="col-sm-8">
+                {% render_field form.event_title class='form-control' placeholder='Enter name of Event' %}
+              </div>
+            </div>
+            <div class="form-group">
+              <label class="col-sm-2 control-label"> Description</label>
+              <div class="col-sm-8">
+                  {% render_field form.event_description class='form-control' placeholder='Describe the event' %}
+              </div>
+            </div>
+            <div class="form-group">
+              <label class="col-sm-2 control-label">Event Date</label>
+              <div class="col-sm-8">
+                <div class="input-group">
+                {% render_field form.event_date class='form-control' data-mask='date' placeholder='DD/MM/YYYY' %}<span class="input-group-addon btn btn-primary"><i class="icon-th mdi mdi-calendar"></i></span>
+              </div>
+            </div>
+            </div>
+            <div class="form-group">
+              <label class="col-sm-2 control-label">Event Time</label>
+              <div class="col-sm-8">
+                <div class="input-group">
+                {% render_field form.event_time id='timepicker1' size='16'  placeholder='00:00:00'data-mask='time' class='form-control' %}<span class="input-group-addon btn btn-primary"><i class="icon-th mdi mdi-time"></i></span>
+              </div>
+              </div>
+            </div>
+            
+            <div class="form-group">
+              <label class="col-sm-2 control-label">Event Image</label>
+              <div class="col-sm-8">
+                <div class="input-group">
+              {% render_field form.event_image class='form-control' %}<span class="input-group-addon btn btn-primary"><i class="icon-th mdi mdi-image"></i></span>
+              </div>
+             
+            </div>
+            </div>
+            <div class="form-group">
+              <label class="col-sm-2 control-label">Event Details</label>
+              <div class="col-sm-8">
+                {% render_field form.event_details class='form-control' id='editor2' name='content' rows='10' %}
+              </div>
+            </div>
+            <div class="form-group">
+            <p class="text-center">
+                <button type="submit" class="btn btn-space btn-primary btn-lg">Submit</button>
+                {% comment %} <button class="btn btn-space btn-default b">Reset</button> {% endcomment %}
+              </p>
+            </div>
+          </form>
+        </div>
+      </div>
+    </div>
+  </div>
+
+</div>
+{% endblock %}

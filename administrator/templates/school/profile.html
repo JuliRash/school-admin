@@ -1,0 +1,72 @@
+{% extends 'school/base.html' %}
+{% load staticfiles %}
+
+{% block title %} {{ request.user.username }}- Profile {% endblock %}
+{% block heading  %} {{ request.user.username }} -Profile {% endblock %}
+{% block content %}
+        <div class="main-content container-fluid">
+        {% include 'school/messages.html' %}
+          <div class="user-profile">
+            <div class="row">
+              <div class="col-md-12">
+                <div class="user-display">
+                  <div class="user-display-bg"><img src="{% static 'assets/img/user-profile-display.png'%}" alt="Profile Background'"></div>
+                  <div class="user-display-bottom">
+                    <div class="user-display-avatar">{% if request.user.profile.picture %}<img src="{{ request.user.profile.picture.url }}" alt="Avatar">{% else %}<img src="{% static 'assets/img/avatar-150.png' %}" alt="Avatar">{% endif %}</div>
+                    <div class="user-display-info">
+                      <div class="name">{{ request.user.first_name }} {{ request.user.last_name }}</div>
+                      <div class="nick"><span class="mdi mdi-account"></span> {{ request.user.username }}</div>
+                    </div>
+                        <div>
+                            <br>
+                            <br>
+                            <a href="{% url 'administrator:update-profile' %}" class="btn btn-right btn-info">Edit Profile</a>
+                        </div>
+                  </div>
+                </div>
+                <div class="user-info-list panel panel-default">
+                  <div class="panel-heading panel-heading-divider">About Me<span class="panel-subtitle">{{ request.user.profile.bio }}.</span></div>
+                  <div class="panel-body">
+                    <table class="no-border no-strip skills">
+                      <tbody class="no-border-x no-border-y">
+                        <tr>
+                          <td class="icon"><span class="mdi mdi-case"></span></td>
+                          <td class="item">Ocupation<span class="icon s7-portfolio"></span></td>
+                          <td>{{ request.user.profile.occupation }}</td>
+                        </tr>
+                        <tr>
+                          <td class="icon"><span class="mdi mdi-cake"></span></td>
+                          <td class="item">Birthday<span class="icon s7-gift"></span></td>
+                          <td>{{ request.user.profile.birth_date }}</td>
+                        </tr>
+                        <tr>
+                          <td class="icon"><span class="mdi mdi-email-open"></span></td>
+                          <td class="item">Email<span class="icon s7-gift"></span></td>
+                          <td>{{ request.user.email }}</td>
+                        </tr>
+                        <tr>
+                          <td class="icon"><span class="mdi mdi-smartphone-android"></span></td>
+                          <td class="item">Mobile<span class="icon s7-phone"></span></td>
+                          <td>{{ request.user.profile.phone }}</td>
+                        </tr>
+                        <tr>
+                          <td class="icon"><span class="mdi mdi-globe-alt"></span></td>
+                          <td class="item">Location<span class="icon s7-map-marker"></span></td>
+                          <td>{{ request.user.profile.location }}</td>
+                        </tr>
+                        <tr>
+                          <td class="icon"><span class="mdi mdi-pin"></span></td>
+                          <td class="item">Website<span class="icon s7-global"></span></td>
+                          <td>{{ request.user.profile.website }}</td>
+                        </tr>
+                      </tbody>
+                    </table>
+                  </div>
+                </div>
+              </div>
+
+            </div>
+
+          </div>
+        </div>
+{% endblock %}

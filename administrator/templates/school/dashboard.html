@@ -1,0 +1,119 @@
+{% extends 'school/base.html' %}
+{% load static %}
+{% block title %} {{ request.user.username }} - Dashboard {% endblock %}
+{% block content %}
+
+<div class="main-content container-fluid">
+
+  <div class="row">
+    <div class="col-xs-12 col-md-6 col-lg-3">
+                <div class="widget widget-tile">
+                  <div id="spark1" class="chart sparkline"></div>
+                  <div class="data-info">
+                    <div class="desc">All Events</div>
+                    <div class="value"><span class="indicator indicator-equal mdi mdi-chevron-right"></span><span data-toggle="counter" data-end="{{ events.count }}" class="number">0</span>
+                    </div>
+                  </div>
+                </div>
+    </div>
+    <div class="col-xs-12 col-md-6 col-lg-3">
+                <div class="widget widget-tile">
+                  <div id="spark2" class="chart sparkline"></div>
+                  <div class="data-info">
+                    <div class="desc">All News</div>
+                    <div class="value"><span class="indicator indicator-positive mdi mdi-chevron-up"></span><span data-toggle="counter" data-end="{{ all_news.count }}" data-suffix="%" class="number">0</span>
+                    </div>
+                  </div>
+                </div>
+    </div>
+    <div class="col-xs-12 col-md-6 col-lg-3">
+                <div class="widget widget-tile">
+                  <div id="spark3" class="chart sparkline"></div>
+                  <div class="data-info">
+                    <div class="desc">All Executives</div>
+                    <div class="value"><span class="indicator indicator-positive mdi mdi-chevron-up"></span><span data-toggle="counter" data-end="{{ executives.count }}" class="number">0</span>
+                    </div>
+                  </div>
+                </div>
+    </div>
+    <div class="col-xs-12 col-md-6 col-lg-3">
+                <div class="widget widget-tile">
+                  <div id="spark4" class="chart sparkline"></div>
+                  <div class="data-info">
+                    <div class="desc">All Teachers</div>
+                    <div class="value"><span class="indicator indicator-negative mdi mdi-chevron-down"></span><span data-toggle="counter" data-end="{{ teachers.count }}" class="number">0</span>
+                    </div>
+                  </div>
+                </div>
+    </div>
+  </div>
+
+  <div class="row">
+    <div class="col-md-6">
+      <div class="panel panel-default panel-table">
+        <div class="panel-heading">
+
+          <div class="title">Latest Events</div>
+        </div>
+        <div class="panel-body table-responsive">
+          <table class="table table-striped table-borderless">
+            <thead>
+              <tr>
+                <th style="">Event Name</th>
+                <th class="date">Event Date</th>
+                <th style="">Event Time</th>
+                <th style="">Event Author</th>
+                <!-- <th style="width:5%;" class="actions"></th> -->
+              </tr>
+            </thead>
+            <tbody class="no-border-x">
+            {% for event in event %}
+              <tr>
+                <td>{{ event.event_title }}</td>
+                <td class="date">{{ event.event_date }}</td>
+                <td>{{ event.event_time }}</td>
+                <td class="text-success">{{ event.event_author }}</td>
+               <!--  <td class="actions"><a href="#" class="icon"><i class="mdi mdi-plus-circle-o"></i></a></td> -->
+              </tr>
+              {% endfor %}
+
+            </tbody>
+          </table>
+        </div>
+      </div>
+    </div>
+    <div class="col-md-6">
+      <div class="panel panel-default panel-table">
+        <div class="panel-heading panel-success">
+
+          <div class="title">Latest News</div>
+        </div>
+        <div class="panel-body table-responsive">
+          <table class="table table-striped table-hover">
+            <thead>
+              <tr>
+                <th style="">News Title</th>
+                <th style="">News Author</th>
+                <th>Date Added</th>
+                <th class="actions">Date_modified</th>
+              </tr>
+            </thead>
+            <tbody>
+            {% for news in news %}
+              <tr>
+                <td>{{ news.news_title }}</td>
+                <td class='text-success'>{{ news.news_author }}</td>
+                <td>{{ news.date_added | date }}</td>
+                <td>{{ news.date_modified | date}}</td>
+              </tr>
+              {% endfor %}
+            </tbody>
+          </table>
+        </div>
+      </div>
+    </div>
+  </div>
+
+
+</div>
+{% endblock %}

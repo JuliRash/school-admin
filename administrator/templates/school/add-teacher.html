@@ -1,0 +1,45 @@
+{% extends 'school/form-base.html' %}
+{% load staticfiles %}
+{% load i18n widget_tweaks %}
+{% block title %}Adeola {% endblock %}
+{% block content %}
+<div class="main-content container-fluid">
+    <div class="row">
+      <div class="col-md-12">
+        <div class="panel panel-default panel-border-color panel-border-color-primary">
+          <div class="panel-heading panel-heading-divider">Teacher<span class="panel-subtitle"></span></div>
+          <div class="panel-body">
+              {# error logic #}
+              {% for field, errors in form.errors.items %}
+              <div class="alert alert-danger alert-dismissible">
+              {% for error in errors %}
+              <center> <strong>{{ error|escape }}</strong></center>
+              {% endfor %}
+              </div>
+              {% endfor %}
+
+            <form action="#" style="border-radius: 0px;" class="form-horizontal group-border-dashed" method="post" enctype="multipart/form-data">
+              {% csrf_token %}
+              {% for field in form %}
+              <div class="form-group">
+                <label class="col-sm-2 control-label">{{ field.label }}</label>
+                <div class="col-sm-8">
+                  {% render_field field class='form-control'  %}
+                </div>
+              </div>
+                {% endfor %}
+              <div class="form-group">
+              <p class="text-center">
+                  <button type="submit" class="btn btn-space btn-primary btn-lg">Submit</button>
+                  {% comment %} <button class="btn btn-space btn-default b">Reset</button> {% endcomment %}
+                </p>
+              </div>
+            </form>
+          </div>
+        </div>
+      </div>
+    </div>
+
+  </div>
+  </div
+  {% endblock %}

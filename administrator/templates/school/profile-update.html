@@ -1,0 +1,99 @@
+{% extends 'school/base.html' %}
+{% load i18n widget_tweaks %}
+{% load staticfiles %}
+{% block title %} {{ request.user.username }}- Dashboard {% endblock %}
+{% block content %}
+        <div class="main-content container-fluid">
+          <div class="user-profile">
+            <div class="row">
+              <div class="col-md-12">
+                <div class="user-display">
+                  <div class="user-display-bg"><img src="{% static 'assets/img/user-profile-display.png'%}" alt="Profile Background'"></div>
+                  <div class="user-display-bottom">
+                    <div class="user-display-avatar"><img src="{% static 'assets/img/avatar-150.png' %}" alt="Avatar"></div>
+                    <div class="user-display-info">
+                      <div class="name">{{ request.user.first_name }} {{ request.user.last_name }}</div>
+                      <div class="nick"><span class="mdi mdi-account"></span> {{ request.user.username }}</div>
+                    </div>
+
+                  </div>
+                </div>
+                <div class="user-info-list panel panel-default">
+                  <div class="panel-heading panel-heading-divider">Update Profile<span class="panel-subtitle">Update your profile information.</span></div>
+                  <div class="panel-body">
+                   <form action="#" style="border-radius: 0px;" class="form-horizontal group-border-dashed" method="post" enctype="multipart/form-data">
+              {% csrf_token %}
+                {% for field in user_form %}
+              <div class="form-group">
+                <label class="col-sm-2 control-label">{{ field.label }}</label>
+                <div class="col-sm-8">
+
+                    {% render_field field class='form-control' %}
+
+                </div>
+              </div>
+                         {% endfor %}
+                   <div class="form-group">
+                <label class="col-sm-2 control-label">Phone Number</label>
+                <div class="col-sm-8">
+
+                    {% render_field profile_form.phone class='form-control' %}
+
+                </div>
+              </div>
+                    <div class="form-group">
+                <label class="col-sm-2 control-label">Picture</label>
+                <div class="col-sm-8">
+
+                    {% render_field profile_form.picture class='form-control' %}
+
+                </div>
+              </div>
+                   <div class="form-group">
+                <label class="col-sm-2 control-label">Birth Date</label>
+                <div class="col-sm-8">
+
+                    {% render_field  profile_form.birth_date class='form-control' placeholder='DD/MM/YYYY'%}
+
+                </div>
+              </div>
+                       <div class="form-group">
+                <label class="col-sm-2 control-label">Occupation</label>
+                <div class="col-sm-8">
+
+                    {% render_field profile_form.occupation class='form-control' %}
+
+                </div>
+              </div>
+                    <div class="form-group">
+                <label class="col-sm-2 control-label">Location</label>
+                <div class="col-sm-8">
+
+                    {% render_field   profile_form.location class='form-control' placeholder='Nigeria, Lagos' %}
+
+                </div>
+              </div>
+                    <div class="form-group">
+                <label class="col-sm-2 control-label">Website</label>
+                <div class="col-sm-8">
+
+                    {% render_field   profile_form.website class='form-control' placeholder='http://' %}
+
+                </div>
+              </div>
+              <div class="form-group">
+              <p class="text-center">
+                  <button type="submit" class="btn btn-space btn-primary btn-lg">Submit</button>
+                  {% comment %} <button class="btn btn-space btn-default b">Reset</button> {% endcomment %}
+                </p>
+              </div>
+            </form>
+                  </div>
+                </div>
+              </div>
+
+            </div>
+
+          </div>
+        </div>
+{% endblock %}
